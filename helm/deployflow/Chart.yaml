@@ -1,0 +1,6 @@
+apiVersion: v2
+name: deployflow
+description: GitOps CI/CD platform for DeployFlow API
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
