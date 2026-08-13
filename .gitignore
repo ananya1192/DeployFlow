@@ -1,0 +1,20 @@
+# Node modules
+app/node_modules/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+app/coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
