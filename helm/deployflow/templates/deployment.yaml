@@ -4,20 +4,25 @@ metadata:
   name: {{ include "deployflow.fullname" . }}
   labels:
     {{- include "deployflow.labels" . | nindent 4 }}
+
 spec:
   replicas: {{ .Values.replicaCount }}
+
   selector:
     matchLabels:
       {{- include "deployflow.selectorLabels" . | nindent 6 }}
+
   template:
     metadata:
       labels:
         {{- include "deployflow.selectorLabels" . | nindent 8 }}
+
     spec:
       containers:
         - name: deployflow
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+
           ports:
             - name: http
               containerPort: {{ .Values.service.targetPort }}
@@ -27,21 +32,19 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
 
           livenessProbe:
-  httpGet:
-    path: {{ .Values.health.path }}
-    port: http
-  initialDelaySeconds: 15
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
+            httpGet:
+              path: {{ .Values.health.path }}
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
 
-readinessProbe:
-  httpGet:
-    path: {{ .Values.health.path }}
-    port: http
-  initialDelaySeconds: 10
-  periodSeconds: 5
-  timeoutSeconds: 5
-  failureThreshold: 3
-
-          
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.health.path }}
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
