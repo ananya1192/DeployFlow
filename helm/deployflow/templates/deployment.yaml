@@ -27,15 +27,21 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
 
           livenessProbe:
-            httpGet:
-              path: {{ .Values.health.path }}
-              port: http
-            initialDelaySeconds: 5
-            periodSeconds: 10
+  httpGet:
+    path: {{ .Values.health.path }}
+    port: http
+  initialDelaySeconds: 15
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
 
-          readinessProbe:
-            httpGet:
-              path: {{ .Values.health.path }}
-              port: http
-            initialDelaySeconds: 5
-            periodSeconds: 5
+readinessProbe:
+  httpGet:
+    path: {{ .Values.health.path }}
+    port: http
+  initialDelaySeconds: 10
+  periodSeconds: 5
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+          
