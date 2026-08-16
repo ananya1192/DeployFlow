@@ -1,4 +1,5 @@
 const express = require("express");
+const packageInfo = require("../../package.json");
 
 const router = express.Router();
 
@@ -6,7 +7,7 @@ router.get("/", (req, res) => {
   res.status(200).json({
     status: "healthy",
     service: "DeployFlow API",
-    version: "1.0.1",
+    version: packageInfo.version,
     timestamp: new Date().toISOString(),
   });
 });
